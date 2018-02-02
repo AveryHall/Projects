@@ -140,48 +140,60 @@ def depthFirstSearch(problem):
         # print n[3]
         return n[3]
 
-    def backtrack(goal, closed_list):
-        print "Closed list here", closed_list
-
-        current_node = goal
-        actions = [action(goal)]
-        current_action = action(goal)
-
-        while state(current_node) != problem.getStartState:
-
-            print "current action", current_action
-
-            if current_action == 'North':
-                print "In here"
-                x, y = state(current_node)
-                parent_state = (x, y-1)
-            if current_action == 'South':
-                x, y = state(current_node)
-                parent_state = (x, y + 1)
-            if current_action == 'East':
-                x, y = state(current_node)
-                parent_state = (x - 1, y)
-            if current_action == 'West':
-                print "In here!"
-                x, y = state(current_node)
-                parent_state = (x + 1, y)
-                print parent_state
-
-            print "parent state", parent_state
-
-            for i in closed:
-                if state(i) == parent_state:
-                    print "Again"
-                    current_node = i
-                    print current_node
-                    current_action = action(i)
-                    if state(i) != problem.getStartState:
-                        actions.append(current_action)
-                    break
-
-            print("Actions: ", actions.reverse())
-
-            return actions.reverse()
+    # def reverse(act):
+    #     if act == 'North':
+    #         return 'South'
+    #     if act == 'South':
+    #         return 'North'
+    #     if act == 'East':
+    #         return 'West'
+    #     if act == 'West':
+    #         return 'East'
+    #
+    # def backtrack(goal, closed_list):
+    #     print "Closed list here", closed_list
+    #
+    #     current_node = goal
+    #     actions = [action(goal)]
+    #     current_action = action(goal)
+    #
+    #     while state(current_node) != problem.getStartState:
+    #
+    #         print "current action", current_action
+    #
+    #         if current_action == 'North':
+    #             # print "In here"
+    #             x, y = state(current_node)
+    #             parent_state = (x, y-1)
+    #         if current_action == 'South':
+    #             x, y = state(current_node)
+    #             parent_state = (x, y + 1)
+    #         if current_action == 'East':
+    #             x, y = state(current_node)
+    #             parent_state = (x - 1, y)
+    #         if current_action == 'West':
+    #             # print "In here!"
+    #             x, y = state(current_node)
+    #             parent_state = (x + 1, y)
+    #             # print parent_state
+    #
+    #         # print "parent state", parent_state
+    #
+    #         for i in closed:
+    #             if state(i) == parent_state and action(i) is not None:
+    #                 # print "Again"
+    #                 current_node = i
+    #                 # print current_node
+    #                 current_action = action(i)
+    #                 # print current_action
+    #                 if state(i) != problem.getStartState:
+    #                     # print state(i) != problem.getStartState
+    #                     actions.append(current_action)
+    #                 break
+    #
+    #     print("Actions: ", actions.reverse())
+    #
+    #     return actions.reverse()
 
     # def backtrack(s, m):
     #     actions = []
@@ -205,17 +217,17 @@ def depthFirstSearch(problem):
     #     return
 
     closed = []
-    path_to_goal = []
+    # path_to_goal = []
     meta = dict()
-    PrevStates = []
+    # PrevStates = []
     fringe = util.Stack()
     fringe.push(make_init_node(problem.getStartState()))
     while fringe:
         node = fringe.pop()
-        print(node)
+        # print(node)
         if problem.isGoalState(state(node)):
-            closed.append(node)
-            return backtrack(node, closed)
+            # closed.append(node)
+            return backtrack(node, meta)
         if node not in closed:
             closed.append(node)
             print state(node)
